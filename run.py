@@ -55,6 +55,14 @@ def find_recipes(flavor, ingredients):
     """
     filtered_recipes = [row for row in data if row['Flavor'].lower() == flavor]
 
+    # Match ingredients with recipes
+    matching_recipes = []
+    for recipe in filtered_recipes:
+        recipe_ingredients = [ingredient.strip().lower() for ingredient in recipe['Ingredients'].split(',')]
+        # Check if any of the user's ingredients match the recipe ingredients
+        if any(ingredient in recipe_ingredients for ingredient in ingredients):
+            matching_recipes.append(recipe['Recipe'])  # Add the recipe name to results
+
 
 
 
