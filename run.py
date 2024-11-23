@@ -62,6 +62,7 @@ def find_recipes(flavor, ingredients):
         # Check if any of the user's ingredients match the recipe ingredients
         if any(ingredient in recipe_ingredients for ingredient in ingredients):
             matching_recipes.append(recipe['Recipe'])  # Add the recipe name to results
+    return matching_recipes
 
 def main():
     """
@@ -70,6 +71,13 @@ def main():
     flavor = get_user_preference()
     ingredients = get_available_ingredients()
     recipes = find_recipes(flavor, ingredients)
+
+    if recipes:
+        print("\nHere are some recipes you can make:")
+        for recipe in recipes:
+            print(f"- {recipe}")
+    else:
+        print("\nNo recipes found with the given ingredients. Try adding more ingredients!")
 
 
 
