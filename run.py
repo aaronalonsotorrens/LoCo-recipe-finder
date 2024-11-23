@@ -23,7 +23,11 @@ def get_user_preference():
     print("Please enter your flavor preference.")
     print("Please choose between: Salty or Sweet.\n")
 
-    data_str = input("Enter your preference here: ")
-    print(f"The recipe preference is {data_str}")
+    while True:
+        data_str = input("Enter your preference here: ").strip().lower()
+        if data_str in ["salty", "sweet"]:
+            return data_str
+        print("Invalid input. Please enter 'salty' or 'sweet'.")
 
 get_user_preference()
+
