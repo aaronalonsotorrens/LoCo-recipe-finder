@@ -31,7 +31,6 @@ def get_user_preference():
             return data_str
         print("Invalid input. Please enter 'salty' or 'sweet'.")
 
-get_user_preference()
 
 def get_available_ingredients():
     """
@@ -41,7 +40,6 @@ def get_available_ingredients():
     ingredients = input("Available ingredients: ").strip().lower().split(',')
     return [ingredient.strip() for ingredient in ingredients]
 
-get_available_ingredients()
 
 def find_recipes(flavor, ingredients):
     """
@@ -69,15 +67,26 @@ def main():
     Main function to run the program
     """
     flavor = get_user_preference()
-    ingredients = get_available_ingredients()
-    recipes = find_recipes(flavor, ingredients)
 
-    if recipes:
-        print("\nHere are some recipes you can make:")
-        for recipe in recipes:
-            print(f"- {recipe}")
-    else:
-        print("\nNo recipes found with the given ingredients. Try adding more ingredients!")
+    while True:
+        # Ask for ingredients
+        ingredients = get_available_ingredients()
+        recipes = find_recipes(flavor, ingredients)
+
+        if recipes:
+            print("\nHere are some recipes you can make:")
+            for recipe in recipes:
+                print(f"- {recipe}")
+            break  # Exit the loop if recipes are found
+        else:
+            print("No recipes found with the given ingredients.")
+            try_again = input("Would you like to try adding more ingredients? (yes/no): ").strip().lower()
+            if try_again != "yes":
+                print("Goodbye! Feel free to try again later.")
+                break 
+    
+if __name__ == "__main__":
+    main()
 
 
 
