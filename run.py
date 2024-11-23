@@ -63,6 +63,14 @@ def find_recipes(flavor, ingredients):
         if any(ingredient in recipe_ingredients for ingredient in ingredients):
             matching_recipes.append(recipe['Recipe'])  # Add the recipe name to results
 
+def main():
+    """
+    Main function to run the program
+    """
+    flavor = get_user_preference()
+    ingredients = get_available_ingredients()
+    recipes = find_recipes(flavor, ingredients)
+
 
 
 
