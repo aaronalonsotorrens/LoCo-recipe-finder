@@ -74,6 +74,20 @@ def add_recipe_to_sheet():
         print("I am sorry we could not be of more help right now please come back soon as we add more recipies to our list. Goodbye!")
         return
 
+    # Get recipe details from the user
+    recipe_name = input("Enter the name of the recipe: ").strip()
+    flavor = input("Enter the flavor (Salty/Sweet): ").strip().lower()
+    while flavor not in ["salty", "sweet"]:
+        print("Invalid input. Please enter 'Salty' or 'Sweet'.")
+        flavor = input("Enter the flavor (Salty/Sweet): ").strip().lower()
+    ingredients = input("Enter the ingredients (comma-separated): ").strip()
+
+    # Append the new recipe to the Google Sheet
+    worksheet = SHEET.worksheet('Meals')
+    worksheet.append_row([recipe_name, flavor, ingredients])
+
+    print(f"\nThank you! Your recipe '{recipe_name}' has been added to the recipe collection.")
+
 
 
 def main():
