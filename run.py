@@ -62,6 +62,20 @@ def find_recipes(flavor, ingredients):
             matching_recipes.append(recipe['Recipe'])  # Add the recipe name to results
     return matching_recipes
 
+def add_recipe_to_sheet():
+    """
+    Allow the user to add a new recipe to the Google Sheet.
+    """
+    print("No recipes found. Would you like to contribute a new recipe to help others?\n")
+
+    # Confirm if the user wants to add a recipe
+    add_recipe = input("Enter 'yes' to add a recipe, or 'no' to exit: ").strip().lower()
+    if add_recipe != 'yes':
+        print("I am sorry we could not be of more help right now please come back soon as we add more recipies to our list. Goodbye!")
+        return
+
+
+
 def main():
     """
     Main function to run the program
