@@ -36,7 +36,7 @@ def get_available_ingredients():
     """
     Ask the user for their available ingredients
     """
-    print("\nEnter the ingredient you have available")
+    print("Enter the ingredient you have available\n")
     ingredients = input("Available ingredients: ").strip().lower().split(',')
     return [ingredient.strip() for ingredient in ingredients]
 
