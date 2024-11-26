@@ -36,7 +36,7 @@ def get_available_ingredients():
     """
     Ask the user for their available ingredients
     """
-    print("Enter the ingredient you have available\n")
+    print("\nEnter the ingredient you have available")
     ingredients = input("Available ingredients: ").strip().lower().split(',')
     return [ingredient.strip() for ingredient in ingredients]
 
@@ -59,21 +59,21 @@ def find_recipes(flavor, ingredients):
         recipe_ingredients = [ingredient.strip().lower() for ingredient in recipe['Ingredients'].split(',')]
         # Check if any of the user's ingredients match the recipe ingredients
         if any(ingredient in recipe_ingredients for ingredient in ingredients):
-            matching_recipes.append(recipe['Recipe'])  # Add the recipe name to results
+            matching_recipes.append(recipe)  # Add the recipe name to results
     return matching_recipes
+
+def list_recipes(recipes):
+    """
+    Display a list of recipes to the user.
+    """
+    print("\nHere are some recipes you can make:")
+    for i, recipe in enumerate(recipes, start=1):
+        print(f"{i}. {recipe['Recipe']}")
 
 def add_recipe_to_sheet():
     """
     Allow the user to add a new recipe to the Google Sheet.
     """
-    print("No recipes found. Would you like to contribute a new recipe to help others?\n")
-
-    # Confirm if the user wants to add a recipe
-    add_recipe = input("Enter 'yes' to add a recipe, or 'no' to exit: ").strip().lower()
-    if add_recipe != 'yes':
-        print("I am sorry we could not be of more help right now please come back soon as we add more recipies to our list. Goodbye!")
-        return
-
     # Get recipe details from the user
     recipe_name = input("Enter the name of the recipe: ").strip()
     flavor = input("Enter the flavor (Salty/Sweet): ").strip().lower()
@@ -88,6 +88,16 @@ def add_recipe_to_sheet():
 
     print(f"\nThank you! Your recipe '{recipe_name}' has been added to the recipe collection.")
 
+def list_recipe_ingredients(recipe_name, all_recipes):
+    """
+    Display the ingredients for the selected recipe.
+    """
+    for recipe in all_recipes:
+        if recipe['Recipe'].lower() == recipe_name.lower():
+            print(f"\nThe ingredients for '{recipe_name}' are:")
+            print(f"{recipe['Ingredients']}")
+            return
+    print("Sorry, we couldn't find the ingredients for that recipe.")
 
 
 def main():
