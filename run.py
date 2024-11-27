@@ -62,6 +62,29 @@ def find_recipes(flavor, ingredients):
             matching_recipes.append(recipe)  # Add the recipe name to results
     return matching_recipes
 
+def view_recipe_ingredients(recipes):
+    """
+    Allow the user to view the ingredients for a selected recipe.
+    """
+    while True:
+        view_ingredients = input("\nWould you like to view the ingredients for any of these recipes? (yes/no): ").strip().lower()
+        if view_ingredients == "yes":
+            try:
+                choice = int(input("Enter the number of the recipe to view its ingredients: "))
+                if 1 <= choice <= len(recipes):
+                    selected_recipe = recipes[choice - 1]
+                    print(f"\nThe ingredients for '{selected_recipe['Recipe']}' are:")
+                    print(f"{selected_recipe['Ingredients']}")
+                    return
+                else:
+                    print("Invalid choice. Please select a valid number.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+        elif view_ingredients == "no":
+            return
+        else:
+            print("Invalid input. Please enter 'yes' or 'no'.")
+
 def list_recipes(recipes):
     """
     Display a list of recipes to the user.
@@ -93,17 +116,6 @@ def add_recipe_to_sheet():
 
     print(f"\nThank you! Your recipe '{recipe_name}' has been added to the recipe collection.")
     return True
-
-def list_recipe_ingredients(recipe_name, all_recipes):
-    """
-    Display the ingredients for the selected recipe.
-    """
-    for recipe in all_recipes:
-        if recipe['Recipe'].lower() == recipe_name.lower():
-            print(f"\nThe ingredients for '{recipe_name}' are:")
-            print(f"{recipe['Ingredients']}")
-            return
-    print("Sorry, we couldn't find the ingredients for that recipe.")
 
 
 def main():
