@@ -16,6 +16,25 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('recipes_project3')
 
+def display_main_menu():
+    """
+    Display the main menu and prompt the user to choose an action.
+    """
+    print("\nMain Menu:")
+    print("1. Find recipes")
+    print("2. Add a recipe")
+    print("3. Exit\n")
+
+    while True:
+        try:
+            choice = int(input("What would you like to do? Enter the number of your choice: "))
+            if choice in [1, 2, 3]:
+                return choice
+            else:
+                print("Invalid choice. Please select 1, 2, or 3.")
+        except ValueError:
+            print("Invalid input. Please enter a number (1, 2, or 3).")
+
 def get_user_preference():
     """
     Get preference of either salty or sweet by the user.
