@@ -79,6 +79,17 @@ def get_available_ingredients(flavor):
     # Allow user to input their choices
     selected_indices = input("Your selection: ").strip().split(',')
 
+    # Validate and collect selected ingredients
+    try:
+        selected_ingredients = [
+            available_ingredients[int(index) - 1]
+            for index in selected_indices
+            if index.isdigit() and 1 <= int(index) <= len(available_ingredients)
+        ]
+    except ValueError:
+        print("\nInvalid input. Please ensure you enter numbers only.")
+
+    return selected_ingredients
 
 def find_recipes(flavor, ingredients):
     """
@@ -123,6 +134,7 @@ def view_recipe_ingredients(recipes):
             return
         else:
             print("Invalid input. Please enter 'yes' or 'no'.")
+        
 
 def list_recipes(recipes):
     """
@@ -168,7 +180,7 @@ def main():
         if user_choice == 1:
             # Option to find recipes
             flavor = get_user_preference()
-            ingredients = get_available_ingredients()
+            ingredients = get_available_ingredients(flavor)
             recipes = find_recipes(flavor, ingredients)
 
             if recipes:
