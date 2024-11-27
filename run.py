@@ -120,27 +120,27 @@ def add_recipe_to_sheet():
 
 def main():
     """
-    Main function to run the program
+    Main function to run the program.
     """
-    flavor = get_user_preference()
-
     while True:
-        # Ask for ingredients
+        flavor = get_user_preference()
         ingredients = get_available_ingredients()
         recipes = find_recipes(flavor, ingredients)
 
         if recipes:
-            print("\nHere are some recipes you can make:")
-            for recipe in recipes:
-                print(f"- {recipe}")
-            break  # Exit the loop if recipes are found
+            list_recipes(recipes)
+            view_recipe_ingredients(recipes)
         else:
-            print("No recipes found with the given ingredients.")
-            try_again = input("Would you like to try adding more ingredients? (yes/no): ").strip().lower()
-            if try_again != "yes":
-                print("Goodbye! Feel free to try again later.")
-                break 
-    
+            print("\nWe are sorry, we have no recipes found with the given ingredients.")
+            if not ask_to_try_again():
+                if not add_recipe_to_sheet():
+                    break
+
+        # Ask the user if they want to continue or exit
+        if not ask_to_continue_or_exit():
+            break
+
+
 if __name__ == "__main__":
     main()
 
