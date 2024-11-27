@@ -69,27 +69,32 @@ def get_available_ingredients(flavor):
     # Select the appropriate list based on the flavor
     available_ingredients = salty_ingredients if flavor == "salty" else sweet_ingredients
 
-    # Display the list of ingredients with numbers
-    print("\nChoose your ingredients from the list below:")
-    for i, ingredient in enumerate(available_ingredients, start=1):
-        print(f"{i}. {ingredient}")
+    while True:
+        # Display the list of ingredients with numbers
+        print("\nChoose your ingredients from the list below:")
+        for i, ingredient in enumerate(available_ingredients, start=1):
+            print(f"{i}. {ingredient}")
 
-    print("\nEnter the numbers of the ingredients you have, separated by commas (e.g., 1,3,5):")
+        print("\nEnter the numbers of the ingredients you have, separated by commas (e.g., 1,3,5):")
 
-    # Allow user to input their choices
-    selected_indices = input("Your selection: ").strip().split(',')
+        # Allow user to input their choices
+        selected_indices = input("Your selection: ").strip().split(',')
 
-    # Validate and collect selected ingredients
-    try:
-        selected_ingredients = [
-            available_ingredients[int(index) - 1]
-            for index in selected_indices
-            if index.isdigit() and 1 <= int(index) <= len(available_ingredients)
-        ]
-    except ValueError:
-        print("\nInvalid input. Please ensure you enter numbers only.")
-
-    return selected_ingredients
+        try:
+        # Validate and collect selected ingredients
+            selected_ingredients = [
+                available_ingredients[int(index) - 1]
+                for index in selected_indices
+                if index.isdigit() and 1 <= int(index) <= len(available_ingredients)
+            ]
+            # Check if at least one valid ingredient was selected
+            if selected_ingredients:
+                print(f"\nYou selected: {', '.join(selected_ingredients)}")
+                return selected_ingredients
+            else:
+                print("\nNo valid ingredients selected. Please try again.")
+        except ValueError:
+            print("\nInvalid input. Please ensure you enter numbers only.")
 
 def find_recipes(flavor, ingredients):
     """
