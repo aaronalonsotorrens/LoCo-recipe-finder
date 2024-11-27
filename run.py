@@ -74,6 +74,11 @@ def add_recipe_to_sheet():
     """
     Allow the user to add a new recipe to the Google Sheet.
     """
+    print("\nNo recipes found. Would you like to contribute a new recipe to help others?")
+    add_recipe = input("Enter 'yes' to add a recipe, or 'no' to exit: ").strip().lower()
+    if add_recipe != 'yes':
+        return False
+    
     # Get recipe details from the user
     recipe_name = input("Enter the name of the recipe: ").strip()
     flavor = input("Enter the flavor (Salty/Sweet): ").strip().lower()
@@ -87,6 +92,7 @@ def add_recipe_to_sheet():
     worksheet.append_row([recipe_name, flavor, ingredients])
 
     print(f"\nThank you! Your recipe '{recipe_name}' has been added to the recipe collection.")
+    return True
 
 def list_recipe_ingredients(recipe_name, all_recipes):
     """
