@@ -51,13 +51,33 @@ def get_user_preference():
         print("Invalid input. Please enter 'salty' or 'sweet'.")
 
 
-def get_available_ingredients():
+def get_available_ingredients(flavor):
     """
-    Ask the user for their available ingredients
+    Display a predefined list of ingredients based on the flavor selected by the user.
+    Allow users to select up to 10 ingredients by entering the corresponding numbers.
     """
-    print("\nEnter the ingredient you have available")
-    ingredients = input("Available ingredients: ").strip().lower().split(',')
-    return [ingredient.strip() for ingredient in ingredients]
+    # Predefined ingredient lists
+    salty_ingredients = [
+        "salt", "pepper", "onions", "garlic", "chicken", "beef",
+        "tomatoes", "rice", "pasta", "butter"
+    ]
+    sweet_ingredients = [
+        "sugar", "flour", "eggs", "butter", "milk", "chocolate",
+        "vanilla", "cream", "apples", "bananas"
+    ]
+
+    # Select the appropriate list based on the flavor
+    available_ingredients = salty_ingredients if flavor == "salty" else sweet_ingredients
+
+    # Display the list of ingredients with numbers
+    print("\nChoose your ingredients from the list below:")
+    for i, ingredient in enumerate(available_ingredients, start=1):
+        print(f"{i}. {ingredient}")
+
+    print("\nEnter the numbers of the ingredients you have, separated by commas (e.g., 1,3,5):")
+
+    # Allow user to input their choices
+    selected_indices = input("Your selection: ").strip().split(',')
 
 
 def find_recipes(flavor, ingredients):
