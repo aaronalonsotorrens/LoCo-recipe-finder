@@ -16,6 +16,10 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('recipes_project3')
 
+from colorama import Fore, Style
+from tqdm import tqdm
+import time
+
 def display_main_menu():
     """
     Display the main menu and prompt the user to choose an action.
@@ -45,10 +49,12 @@ def get_user_preference():
     print("Please choose between: Salty or Sweet.\n")
 
     while True:
-        data_str = input("Enter your preference here: ").strip().lower()
+        data_str = input(f"{Fore.YELLOW}Enter your preference here:{Style.RESET_ALL} ").strip().lower()
         if data_str in ["salty", "sweet"]:
             return data_str
-        print("Invalid input. Please enter 'salty' or 'sweet'.")
+        print(f"{Fore.RED}Invalid input. Please enter 'salty' or 'sweet'.{Style.RESET_ALL}")
+
+
 
 
 def get_available_ingredients(flavor):
