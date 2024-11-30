@@ -17,14 +17,17 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('recipes_project3')
 
 from colorama import Fore, Style
-from tqdm import tqdm
-import time
+from art import text2art
+
+
 
 def display_main_menu():
     """
     Display the main menu and prompt the user to choose an action.
     """
-    print("\nMain Menu:")
+
+    print("\nWelcome to the Recipe Finder! Your guide to delicious meals.")
+    print("\nMain Menu:\n")
     print("1. Find recipes")
     print("2. Add a recipe")
     print("3. Exit\n")
@@ -45,7 +48,7 @@ def get_user_preference():
     Raises error if user doesn't choose between sweet or
     salty
     """
-    print("Please enter your flavor preference.")
+    print("\nPlease enter your flavor preference.\n")
     print("Please choose between: Salty or Sweet.\n")
 
     while True:
@@ -53,8 +56,6 @@ def get_user_preference():
         if data_str in ["salty", "sweet"]:
             return data_str
         print(f"{Fore.RED}Invalid input. Please enter 'salty' or 'sweet'.{Style.RESET_ALL}")
-
-
 
 
 def get_available_ingredients(flavor):
@@ -102,11 +103,21 @@ def get_available_ingredients(flavor):
         except ValueError:
             print("\nInvalid input. Please ensure you enter numbers only.")
 
+def simulate_loading(action="Loading"):
+    """
+    Simulate a loading animation.
+    """
+    for _ in tqdm(range(100), desc=action, ascii=True, ncols=80):
+        time.sleep(0.01)
+
+
 def find_recipes(flavor, ingredients):
     """
     Find recipes based on flavor and user-provided ingredients.
     Filter the recipes by the chosen flavor.
     """
+    simulate_loading("Searching for recipes")  # Show the loading animation here
+    
     worksheet = SHEET.worksheet('Meals')  
     data = worksheet.get_all_records()
     """
@@ -131,20 +142,20 @@ def view_recipe_ingredients(recipes):
         view_ingredients = input("\nWould you like to view the ingredients for any of these recipes? (yes/no): ").strip().lower()
         if view_ingredients == "yes":
             try:
-                choice = int(input("Enter the number of the recipe to view its ingredients: "))
+                choice = int(input("\nEnter the number of the recipe to view its ingredients: "))
                 if 1 <= choice <= len(recipes):
                     selected_recipe = recipes[choice - 1]
                     print(f"\nThe ingredients for '{selected_recipe['Recipe']}' are:")
                     print(f"{selected_recipe['Ingredients']}")
                     return
                 else:
-                    print("Invalid choice. Please select a valid number.")
+                    print("\nInvalid choice. Please select a valid number.")
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                print("\nInvalid input. Please enter a number.")
         elif view_ingredients == "no":
             return
         else:
-            print("Invalid input. Please enter 'yes' or 'no'.")
+            print("\nInvalid input. Please enter 'yes' or 'no'.")
         
 
 def list_recipes(recipes):
@@ -159,18 +170,14 @@ def add_recipe_to_sheet():
     """
     Allow the user to add a new recipe to the Google Sheet.
     """
-    print("\nNo recipes found. Would you like to contribute a new recipe to help others?")
-    add_recipe = input("Enter 'yes' to add a recipe, or 'no' to exit: ").strip().lower()
-    if add_recipe != 'yes':
-        return False
     
     # Get recipe details from the user
-    recipe_name = input("Enter the name of the recipe: ").strip()
-    flavor = input("Enter the flavor (Salty/Sweet): ").strip().lower()
+    recipe_name = input("\nEnter the name of the recipe: ").strip()
+    flavor = input("\nEnter the flavor (Salty/Sweet): ").strip().lower()
     while flavor not in ["salty", "sweet"]:
-        print("Invalid input. Please enter 'Salty' or 'Sweet'.")
-        flavor = input("Enter the flavor (Salty/Sweet): ").strip().lower()
-    ingredients = input("Enter the ingredients (comma-separated): ").strip()
+        print("\nInvalid input. Please enter 'Salty' or 'Sweet'.")
+        flavor = input("\nEnter the flavor (Salty/Sweet): ").strip().lower()
+    ingredients = input("\nEnter the ingredients (comma-separated): ").strip()
 
     # Append the new recipe to the Google Sheet
     worksheet = SHEET.worksheet('Meals')
@@ -214,6 +221,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
