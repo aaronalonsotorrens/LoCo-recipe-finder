@@ -78,11 +78,11 @@ def get_available_ingredients(flavor):
 
     while True:
         # Display the list of ingredients with numbers
-        print("\nChoose your ingredients from the list below:")
+        print("\nChoose your ingredients from the list below:\n")
         for i, ingredient in enumerate(available_ingredients, start=1):
             print(f"{i}. {ingredient}")
 
-        print("\nEnter the numbers of the ingredients you have, separated by commas (e.g., 1,3,5):")
+        print("\nEnter one of the available ingredients:")
 
         # Allow user to input their choices
         selected_indices = input("Your selection: ").strip().split(',')
