@@ -65,7 +65,7 @@ def get_available_ingredients(flavor):
     """
     # Predefined ingredient lists
     salty_ingredients = [
-        "salt", "pepper", "onions", "garlic", "chicken", "beef",
+        "salt", "peppers", "onions", "garlic", "chicken", "beef",
         "tomatoes", "rice", "pasta", "butter"
     ]
     sweet_ingredients = [
@@ -103,21 +103,11 @@ def get_available_ingredients(flavor):
         except ValueError:
             print("\nInvalid input. Please ensure you enter numbers only.")
 
-def simulate_loading(action="Loading"):
-    """
-    Simulate a loading animation.
-    """
-    for _ in tqdm(range(100), desc=action, ascii=True, ncols=80):
-        time.sleep(0.01)
-
-
 def find_recipes(flavor, ingredients):
     """
     Find recipes based on flavor and user-provided ingredients.
     Filter the recipes by the chosen flavor.
     """
-    simulate_loading("Searching for recipes")  # Show the loading animation here
-    
     worksheet = SHEET.worksheet('Meals')  
     data = worksheet.get_all_records()
     """
@@ -134,37 +124,15 @@ def find_recipes(flavor, ingredients):
             matching_recipes.append(recipe)  # Add the recipe name to results
     return matching_recipes
 
-def view_recipe_ingredients(recipes):
-    """
-    Allow the user to view the ingredients for a selected recipe.
-    """
-    while True:
-        view_ingredients = input("\nWould you like to view the ingredients for any of these recipes? (yes/no): ").strip().lower()
-        if view_ingredients == "yes":
-            try:
-                choice = int(input("\nEnter the number of the recipe to view its ingredients: "))
-                if 1 <= choice <= len(recipes):
-                    selected_recipe = recipes[choice - 1]
-                    print(f"\nThe ingredients for '{selected_recipe['Recipe']}' are:")
-                    print(f"{selected_recipe['Ingredients']}")
-                    return
-                else:
-                    print("\nInvalid choice. Please select a valid number.")
-            except ValueError:
-                print("\nInvalid input. Please enter a number.")
-        elif view_ingredients == "no":
-            return
-        else:
-            print("\nInvalid input. Please enter 'yes' or 'no'.")
         
-
-def list_recipes(recipes):
+def list_recipes_with_ingredients(recipes):
     """
     Display a list of recipes to the user.
     """
     print("\nHere are some recipes you can make:")
     for i, recipe in enumerate(recipes, start=1):
-        print(f"{i}. {recipe['Recipe']}")
+        print(f"\n{i}. {recipe['Recipe']}")
+        print(f"\nIngredients: {recipe['Ingredients']}")
 
 def add_recipe_to_sheet():
     """
@@ -202,12 +170,31 @@ def main():
             recipes = find_recipes(flavor, ingredients)
 
             if recipes:
-                list_recipes(recipes)
-                view_recipe_ingredients(recipes)
+                list_recipes_with_ingredients(recipes)
             else:
                 print("\nWe are sorry, we have no recipes found with the given ingredients.")
-                if not ask_to_try_again():
-                    print("Please consider adding a new recipe to help others!")
+
+            # Loop for searching again
+            
+            while True:
+                another_search = input("\nWould you like to select a new ingredient and see new recipes? (yes/no): ").strip().lower()
+
+                if another_search == "yes":
+                    ingredients = get_available_ingredients(flavor)
+                    recipes = find_recipes(flavor, ingredients)
+
+                    if recipes:
+                        list_recipes_with_ingredients(recipes)
+
+                    else:
+                        print("\nWe are sorry, we have no recipes found with the given ingredients.")
+
+                elif another_search == "no":
+                    print("\nReturning to the main menu...")
+                    break
+
+                else:
+                    print("Invalid input. Please enter 'yes' or 'no'.")
 
         elif user_choice == 2:
             # Option to add a recipe
