@@ -1,5 +1,9 @@
 # Recipe Finder LoCo
 
+<p align="center">
+    <img src="./assets/images/responsive_image.png" alt="Responsive image"/>
+</p>
+
 ## Introduction
 
 Welcome to my third project, part of the Code Institute Full Stack Development Course. The purpose of this project is to build a responsive website using python.
@@ -171,6 +175,30 @@ Fore style was chosen due to its easy legibility. None of these have been overly
 <p align="center">
     <img src="./assets/images/googlesheet_added.png" alt="Recipe added to googlesheet"/>
 </p>
+
+* The program uses gspread API to interact with googlesheets where the ingredients and flavour profile for each recipe is stored.
+
+<p align="center">
+    <img src="./assets/images/googlesheet_project_3.png" alt="Googlesheet used in the project"/>
+</p>
+
+* When option 3 is chosen the user will be asked if the wish to return to the main menu or exit. This is to allow the user to rectify a possible mistake by having clicked option 3 by mistake. If they do decide to leave a goodbye message will be shown.
+
+<p align="center">
+    <img src="./assets/images/goodbye_message.png" alt="Goodbye message when exiting the program"/>
+</p>
+
+
+### Future Features
+
+The application can be further developed. Some features include the following:
+
+* Add cooking instructions for each recipe.
+* Add an estimate cooking time for each recipe.
+* Add quantities to each ingredient to show how much it is needed per person.
+* Add calorie count to each ingredient to calculate the calories or nutritional content on each recipe.
+
+the application can be further developed over a brief period to improve UX. Here are the immediate development roadmap features:
 
 
 
