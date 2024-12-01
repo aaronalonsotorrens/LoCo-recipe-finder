@@ -198,7 +198,172 @@ The application can be further developed. Some features include the following:
 * Add quantities to each ingredient to show how much it is needed per person.
 * Add calorie count to each ingredient to calculate the calories or nutritional content on each recipe.
 
-the application can be further developed over a brief period to improve UX. Here are the immediate development roadmap features:
+### Testing
+
+#### Validator testing
+
+* Python
+
+No major issues found when run through Code Institute's PEP8 linter.
+
+<p align="center">
+    <img src="./assets/images/pep8_validation.png" alt="PEP8 linter validator"/>
+</p>
+
+Validator Testing
+Python
+No major issues found when run through a PEP8 linter. Code Institute's PEP8 linter.
+
+#### Manual testing
+
+<p align="center">
+    <img src="./assets/images/manual_testing.png" alt="Manual testing of the code"/>
+</p>
+
+### Fixed Bugs
+
+Throughout this project there were no major bugs. However, I did encounter an issue. My computer broke down during this project and had to request a friends. I opened a new workspace and started adding new commits as I worked on my new workspace without realising they were not being saved. I tried troubleshooting this with tutors by pulling the git commits. However, further errors started appearing. The issue was eventually solved thanks to the help of my mentor where he suggested to save the current code directly in the run.py from github.
+
+### Unfixed
+
+No unfixed bugs that I am aware of.
+
+### Deployment
+
+#### Create googlesheet and integrate using an API
+
+<details>
+    <summary></summary>
+
+Create a Spreadsheet (Data Model)
+1. Login to your Google account, create an account if necessary.
+1. Navigate to Sheets, Googles version of Microsoft Excel.
+1. Start a new spreadsheet,
+
+
+Setup API
+1. Navigate to Google cloud platform.
+1. If you do not already have a profile then follow the basic steps for creating an Account, via clicking on the 'Get Started for Free' button in the upper right corner.
+1. Once the previous step is complete, create a new project with a unique title
+1. You should now arrive at the project dashboard and be ready to setup the required credentials:
+    * Access the navigation menu from clicking on the hamburger button
+    * Select APIs and Services, followed by 'Library'
+    * Search for and select Google Drive API -> Enable
+    * Search for and select Google Sheets API -> Enable
+    * Click Enable to navigate to 'API and Services Overview' 
+    * Click Create Credentials in the upper left of the screen
+    * For Credential Type, select 'Google Drive' from the dropdown
+    * For 'What data will you be accessing' select Application Data
+    * For 'Are you planning to use this API with Compute Engine...?' choose 'No, I'm not...'
+    * Click Next
+    * Within the Create Service Account page, enter a Service Account Name
+    * Click Create and Continue
+    * Next within 'Grant this service account access to project', choose Basic -> Editor from the 'Select a Role' dropdown
+    * Click Continue
+    * Next within 'Grant users access to this service account', choose 'Done'
+    * On the following, click on the 'Service Account Name' you created to navigate to the config page
+    * Navigate to the Keys section
+    * Select 'Add Key' dropdown -> Create New Key.
+    * Select 'JSON' -> Create - the file will download to your machine
+    * From your local downloads folder, add file directly to your Gitpod workspace, and rename the file to creds.json
+    * Within the file, copy the value for 'client email'. Paste this email address into the 'Share' area of your Google Sheet, assigning the role of Editor
+
+Enable API within IDE
+1. From within your GitPod IDE terminal, enter 'pip3 install gspread google-auth'
+1. At the top of your Python file add the following lines:
+
+    ```
+    import gspread
+    from google.oauth2.service_account import Credentials
+    ```
+    
+1. Below this add the following code:
+
+    ```
+        SCOPE = [
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive.file",
+            "https://www.googleapis.com/auth/drive"
+            ]
+
+        CREDS = Credentials.from_service_account_file('creds.json')
+        SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+        GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+        SHEET = GSPREAD_CLIENT.open('vv_pizzas')
+        console = Console()
+        install(show_locals=True)
+    ```
+</details>
+
+#### Deploy with Heroku
+<details>
+    <summary></summary>
+
+* The requirements.txt file in the IDE must be updated to package all dependencies. To do this:
+    1. Enter the following into the terminal: 'pip3 freeze > requirements.txt'
+    1. Commit the changes and push to GitHub
+
+* Next, follow the steps below:
+    1. Login to Heroku, create an account if necessary
+    1. Once at your Dashboard, click 'Create New App'
+    1. Enter a name for your application, this must be unique, and select a region
+    1. Click 'Create App'
+    1. At the Application Configuration page, apply the following to the Settings and Deploy sections:
+        * Within 'Settings', scroll down to the Config Vars section to apply the credentials being used by the application. In the Reveal Config Vars enter 'CREDS' for the Key field and paste the all the contents from the creds.json file into the Value field
+        * Click 'Add'
+        * Add another Config Var with the Key of 'PORT' and the Value of '8000'
+        * Within Settings, scroll down to the Buildpacks sections, click to Add a Buildpack
+        * Select Python from the pop-up window and Save
+        * Add the Node.js Buildpack using the same method
+        * Navigate to the Deploy section, select Github as the deployment method, and connect to GitHub when prompted
+        * Use your GitHub repository name created for this project
+        * Finally, scroll down to and select to deploy 'Automatically' as this will ensure each time you push code in GitHub, the pages through Heroku are updated
+    1. Your application can be run from the Application Configuration section, click 'Open App'
+
+</details>
+
+***
+
+### Credits
+
+I want to my mentor Brian Macharia for all of his amazing support and guidance on how to improve my code and how to deliver a better user experience.
+
+Support on developing ideas were derived from the following:
+
+* The inspiration of building a recipe finder
+https://www.makeuseof.com/recipe-finder-app-python/
+
+* Inspiration from seeing flowcharts and googlesheet organisation 
+https://github.com/RickofManc/vv-pizzas
+https://github.com/alexkavanagh-dev/grocery_list_generator
+
+* Deployment information taken from 
+https://github.com/RickofManc/vv-pizzas
+
+### Python libraries, software and web application
+
+* To display recipes, flavour profile and ingredients.
+[Google Sheet] (https://docs.google.com/spreadsheets/d/1QEgz7x3UKXEElsaPsE19S-WLulp7T6IgYADYWpCqXQU/edit?pli=1&gid=2115059317#gid=2115059317)
+
+* To display colours for better visibility.
+[Colorama] (https://pypi.org/project/colorama/)
+
+* To display flow chart.
+[LucidChart](https://www.lucidchart.com/pages/)
+
+* To look for questions and solve doubts
+[W3schools](https://www.w3schools.com/)
+[ChatGPT] (https://chatgpt.com)
+
+* For testing sections of code
+[Python Tutor](https://pythontutor.com/)
+
+* To validate python code
+[PEP8 Validator](http://pep8online.com/)
+
+
+
+
 
 
 
