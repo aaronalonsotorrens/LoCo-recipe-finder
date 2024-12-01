@@ -124,7 +124,7 @@ def list_recipes_with_ingredients(recipes):
     print("\nHere are some recipes you can make:")
     for i, recipe in enumerate(recipes, start=1):
         print(f"\n{i}. {Fore.GREEN}{recipe['Recipe']}{Style.RESET_ALL}")
-        print(f"{Fore.BLUE}Ingredients: {recipe['Ingredients']}{Style.RESET_ALL}")
+        print(f"{Fore.BLUE}Ingredients: {Style.RESET_ALL}{recipe['Ingredients']}")
 
 def add_recipe_to_sheet():
     """

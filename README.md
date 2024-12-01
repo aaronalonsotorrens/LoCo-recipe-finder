@@ -1,14 +1,14 @@
-# Super Mario Arcade
+# Recipe Finder LoCo
 
 ## Introduction
 
 Welcome to my third project, part of the Code Institute Full Stack Development Course. The purpose of this project is to build a responsive website using python.
 
-The code is a recipe finder. This is supposed to be a convenient and easy-to-use tool that helps you discover new meal ideas based on the ingredients you already have at home. The user will then have an option to add a recipe to the database to help other users find new recipes.
+The code is a recipe finder. This is supposed to be a convenient and easy-to-use tool that helps you discover new meal ideas based on common ingredients that most people should have in their homes. The user will have the option to either find a recipe or add a recipe themselves to help other users find new recipes.
 
 ## Strategy
 
-How many times have we come back from a long day at work we look in our fridge and we just stare without knowing what to cook. This code is supposed to solve that issue. Put those ingredients on the app and make those decisions go away.
+How many times have we come back from a long day at work we look in our fridge and we just stare without knowing what to cook. Recipe finder LoCo is meant to help you look less and cook more. Choose from any of the ingredients dispplayed and make help those tough decisions go away.
 
 ## UX - User Experience Design
 
@@ -24,22 +24,80 @@ The 5 planes of UX are the following:
 
 1. As the owner
 
-- I want give the user choices between salty or sweet 
+- I want to show a greeting message and display a menu showing the options available.
 
-- I want the user to be able to see what recipes are available when they insert the ingredeints
+- If the user chooses to find a recipe I want to help them make their choice easier by choosing between salty or sweet 
 
-- I want errors indicating if the input is not correct and guide the user on how to solve the issue
+- I want the user to see the list of ingredients they can choose from easily and for recipes to appear when the ingredient is selected.
 
-- I want the user to have the option to see the list of all ingredeints needed for the recipe chosen
+- I want errors indicating if the input is not correct and allow the user to try again.
 
-- I want the user to feel engaged by allowing to contribute by adding their own recipes
+- I want to give the user to find other recipes with other ingredients.
+
+- I want to give the user to be able to exit and go back to the main menu.
+
+- I want the user to feel engaged by allowing to contribute by adding their own recipes.
 
 2. As a customer
 
-- I want to have an easy tool to guide me through the different steps to find a suitable recipe
+- I want to have a tool that will allow me to explore and find new recipes in an easy and simple way.
 
-- I want to see the options available with the ingredeints inserted and then give all ingredients part of that dish
+- I want to see all recipes available using the ingredeint selected and to see all remaining ingredients to make that recipe.
 
-- I appreciate being able to contribute to the app and having clear indications on how to do so
+- Given the choice to add my own recipe I want it to be simple and with instructions easy to follow.
+
+### The scope
+
+Below is a list of the leading features for the application.
+
+#### In Scope Features
+
+- A welcome message.
+
+- Option to find a recipe.
+- Option to choose recipe based on flavour preference.
+- Option to choose between list of different ingredients.
+- Option to repeat the process to find new recipes or return to the main menu.
+
+- Option to add new recipe.
+- Add the recipe to the spreadsheet alongside flavour profile and list of ingredients.
+
+#### Out of Scope Features that could be implemented in the future
+
+- Extend the list of recipes available.
+
+- Include more flavour profiles or dietary restrictions.
+
+- Include new categories such as nationalities, seasonal, etc.
+
+- Add cooking instructions for each recipe for the user to understand how to make their chosen recipe.
+
+### Structure
+
+The website will be structured with the following design considerations.
+
+The user will be welcomed to the CLI (Command Line Interface) with a welcome message.
+The user will be asked for enter one of the following options displayed on the main menu.
+If they weish to find a recipe they will asked to decide on a flavour profile (Salty/sweet).
+As a result a list of ingredients will show, from which the user can pick. 
+This will be followed by a showing a list of recipes containing that ingredients.
+The user will then get the chance to decide if they wish to repeat the process with a new ingredient or exit.
+If the customer wishes to add a new recipe instead, they will asked to add the name of the recipe.
+Followed by its flavour profile.
+And finally they will be asked to add a list of ingredients within that recipe.
+The user will be thanked for adding a recipe and they will return to the main menu.
+If the user wishes to exit instead, they will recieve a prompt to make confirm that decision and if they do wish them goodbye. If they answer no they will go back to the main menu.
+
+### Skeleton
+
+The website will contain a simple interface that immediately welcomes the customers and takes them through the process with minimal inputs.
+
+Aesthetically the page will be clean with no images, with some basic colours on some sections to guide the eye of the user across the code.
+
+Should the user make an error whilst navigating through the system, a message will appear guiding them and allowing them to repeat their input.
+
+
+
+
 
 
