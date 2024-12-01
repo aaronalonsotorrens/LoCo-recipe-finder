@@ -116,7 +116,7 @@ Fore style was chosen due to its easy legibility. None of these have been overly
 
 ### Features
 
-## Current Features
+### Current Features
 
 * A welcome message greets the customer.
 
