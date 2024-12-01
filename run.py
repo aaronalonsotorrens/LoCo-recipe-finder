@@ -49,7 +49,7 @@ def get_user_preference():
     salty
     """
     print("\nPlease enter your flavor preference.\n")
-    print("Please choose between: Salty or Sweet.\n")
+    print(f"Please choose between: {Fore.BLUE}Salty{Style.RESET_ALL} or {Fore.BLUE}Sweet{Style.RESET_ALL}.\n")
 
     while True:
         data_str = input(f"{Fore.YELLOW}Enter your preference here:{Style.RESET_ALL} ").strip().lower()
@@ -84,24 +84,16 @@ def get_available_ingredients(flavor):
 
         print("\nEnter one of the available ingredients:")
 
-        # Allow user to input their choices
-        selected_indices = input("Your selection: ").strip().split(',')
+        # Get the user's input
+        selected_input = input("Your selection: ").strip()
 
-        try:
-        # Validate and collect selected ingredients
-            selected_ingredients = [
-                available_ingredients[int(index) - 1]
-                for index in selected_indices
-                if index.isdigit() and 1 <= int(index) <= len(available_ingredients)
-            ]
-            # Check if at least one valid ingredient was selected
-            if selected_ingredients:
-                print(f"\nYou selected: {', '.join(selected_ingredients)}")
-                return selected_ingredients
-            else:
-                print("\nNo valid ingredients selected. Please try again.")
-        except ValueError:
-            print("\nInvalid input. Please ensure you enter numbers only.")
+        # Check if the input is a single valid number
+        if selected_input.isdigit() and 1 <= int(selected_input) <= len(available_ingredients):
+            selected_ingredient = available_ingredients[int(selected_input) - 1]
+            print(f"\nYou selected: {selected_ingredient}")
+            return [selected_ingredient]  # Return as a list to match expected structure
+        else:
+            print(f"\n{Fore.RED}Invalid input. Please enter a single valid number from the list.{Style.RESET_ALL}")
 
 def find_recipes(flavor, ingredients):
     """
@@ -110,9 +102,9 @@ def find_recipes(flavor, ingredients):
     """
     worksheet = SHEET.worksheet('Meals')  
     data = worksheet.get_all_records()
-    """
-    Filter recipes by the chosen flavor
-    """
+    
+    # Filter recipes by the chosen flavor
+    
     filtered_recipes = [row for row in data if row['Flavor'].lower() == flavor]
 
     # Match ingredients with recipes
@@ -131,8 +123,8 @@ def list_recipes_with_ingredients(recipes):
     """
     print("\nHere are some recipes you can make:")
     for i, recipe in enumerate(recipes, start=1):
-        print(f"\n{i}. {recipe['Recipe']}")
-        print(f"\nIngredients: {recipe['Ingredients']}")
+        print(f"\n{i}. {Fore.GREEN}{recipe['Recipe']}{Style.RESET_ALL}")
+        print(f"{Fore.BLUE}Ingredients: {recipe['Ingredients']}{Style.RESET_ALL}")
 
 def add_recipe_to_sheet():
     """
@@ -201,9 +193,19 @@ def main():
             add_recipe_to_sheet()
 
         elif user_choice == 3:
-            # Exit the program
-            print("\nThank you for using the recipe finder! Goodbye!")
-            break
+            # Confirmation before exiting
+            back_to_main_menu = input(
+                "Please enter 'y' to go back to the main menu or anything else to exit: "
+            ).strip().lower()
+
+            if back_to_main_menu == 'y':
+                print("\nReturning to the main menu...")
+                continue  # Go back to the start of the main loop
+            else:
+                print("\nThank you for using the Recipe Finder! Goodbye!")
+                break  # Exit the program
+
+    
 
 
 if __name__ == "__main__":
