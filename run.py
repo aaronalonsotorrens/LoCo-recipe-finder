@@ -1,27 +1,29 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from colorama import Fore, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('recipes_project3')
 
-from colorama import Fore, Style
-from art import text2art
-
-
 
 def display_main_menu():
     """
     Display the main menu and prompt the user to choose an action.
-    """
 
+    Returns:
+        int: The user's menu choice (1, 2, or 3).
+
+    Raises:
+        ValueError: If the user input is not a valid number or choice.
+    """
     print("\nWelcome to the Recipe Finder! Your guide to delicious meals.")
     print("\nMain Menu:\n")
     print("1. Find recipes")
@@ -30,7 +32,9 @@ def display_main_menu():
 
     while True:
         try:
-            choice = int(input("What would you like to do? Enter the number of your choice: "))
+            choice = int(
+                input("What would you like to do? Enter the number of your "
+                      "choice: "))
             if choice in [1, 2, 3]:
                 return choice
             else:
@@ -38,28 +42,44 @@ def display_main_menu():
         except ValueError:
             print("Invalid input. Please enter a number (1, 2, or 3).")
 
+
 def get_user_preference():
     """
-    Get preference of either salty or sweet by the user.
-    Raises error if user doesn't choose between sweet or
-    salty
+    Get the user's preference for either salty or sweet recipes.
+
+    Returns:
+        str: The user's flavor preference ('salty' or 'sweet').
+
+    Raises:
+        ValueError: If the user enters a value other than 'salty' or 'sweet'.
     """
     print("\nPlease enter your flavor preference.\n")
-    print(f"Please choose between: {Fore.BLUE}Salty{Style.RESET_ALL} or {Fore.BLUE}Sweet{Style.RESET_ALL}.\n")
+    print(f"Please choose between: {Fore.BLUE}Salty{Style.RESET_ALL} "
+          f"or {Fore.BLUE}Sweet{Style.RESET_ALL}.\n")
 
     while True:
-        data_str = input(f"{Fore.YELLOW}Enter your preference here:{Style.RESET_ALL} ").strip().lower()
+        data_str = input(f"{Fore.YELLOW}Enter your preference here:"
+                         f"{Style.RESET_ALL} ").strip().lower()
         if data_str in ["salty", "sweet"]:
             return data_str
-        print(f"{Fore.RED}Invalid input. Please enter 'salty' or 'sweet'.{Style.RESET_ALL}")
+        print(f"{Fore.RED}Invalid input. Please enter 'salty' or 'sweet'."
+              f"{Style.RESET_ALL}")
 
 
 def get_available_ingredients(flavor):
     """
-    Display a predefined list of ingredients based on the flavor selected by the user.
-    Allow users to select up to 10 ingredients by entering the corresponding numbers.
+    Display a list of available ingredients based on the selected flavor
+    and allow the user to select ingredients.
+
+    Args:
+        flavor (str): The user's flavor preference ('salty' or 'sweet').
+
+    Returns:
+        list: A list of selected ingredients chosen by the user.
+
+    Raises:
+        ValueError: If the user enters invalid input for ingredient selection.
     """
-    # Predefined ingredient lists
     salty_ingredients = [
         "salt", "peppers", "onions", "garlic", "chicken", "beef",
         "tomatoes", "rice", "pasta", "butter"
@@ -68,66 +88,79 @@ def get_available_ingredients(flavor):
         "sugar", "flour", "eggs", "butter", "milk", "chocolate",
         "vanilla", "cream", "apples", "bananas"
     ]
-
-    # Select the appropriate list based on the flavor
-    available_ingredients = salty_ingredients if flavor == "salty" else sweet_ingredients
+    available_ingredients = salty_ingredients if flavor == "salty" \
+        else sweet_ingredients
 
     while True:
-        # Display the list of ingredients with numbers
         print("\nChoose your ingredients from the list below:\n")
         for i, ingredient in enumerate(available_ingredients, start=1):
             print(f"{i}. {ingredient}")
 
         print("\nEnter one of the available ingredients:")
 
-        # Get the user's input
         selected_input = input("Your selection: ").strip()
 
-        # Check if the input is a single valid number
-        if selected_input.isdigit() and 1 <= int(selected_input) <= len(available_ingredients):
-            selected_ingredient = available_ingredients[int(selected_input) - 1]
+        if selected_input.isdigit() and 1 <= int(selected_input) <= \
+                len(available_ingredients):
+            selected_ingredient = available_ingredients[
+                int(selected_input) - 1]
             print(f"\nYou selected: {selected_ingredient}")
-            return [selected_ingredient]  # Return as a list to match expected structure
+            return [selected_ingredient]
         else:
-            print(f"\n{Fore.RED}Invalid input. Please enter a single valid number from the list.{Style.RESET_ALL}")
+            print(f"\n{Fore.RED}Invalid input. Please enter a single valid "
+                  f"number from the list.{Style.RESET_ALL}")
+
 
 def find_recipes(flavor, ingredients):
     """
-    Find recipes based on flavor and user-provided ingredients.
-    Filter the recipes by the chosen flavor.
+    Find recipes from a Google Sheet based on the selected flavor
+    and user-provided ingredients.
+
+    Args:
+        flavor (str): The selected flavor ('salty' or 'sweet').
+        ingredients (list): A list of ingredients selected by the user.
+
+    Returns:
+        list: A list of dictionaries, each containing recipe details
+              (e.g., 'Recipe', 'Ingredients').
     """
-    worksheet = SHEET.worksheet('Meals')  
+    worksheet = SHEET.worksheet('Meals')
     data = worksheet.get_all_records()
-    
-    # Filter recipes by the chosen flavor
-    
+
     filtered_recipes = [row for row in data if row['Flavor'].lower() == flavor]
 
-    # Match ingredients with recipes
     matching_recipes = []
     for recipe in filtered_recipes:
-        recipe_ingredients = [ingredient.strip().lower() for ingredient in recipe['Ingredients'].split(',')]
-        # Check if any of the user's ingredients match the recipe ingredients
+        recipe_ingredients = [
+            ingredient.strip().lower() for ingredient in recipe[
+                'Ingredients'].split(',')
+        ]
         if any(ingredient in recipe_ingredients for ingredient in ingredients):
-            matching_recipes.append(recipe)  # Add the recipe name to results
+            matching_recipes.append(recipe)
     return matching_recipes
 
-        
+
 def list_recipes_with_ingredients(recipes):
     """
-    Display a list of recipes to the user.
+    Display a list of recipes based on the user's selected ingredients.
+
+    Args:
+        recipes (list): A list of recipes that match the user's criteria.
     """
     print("\nHere are some recipes you can make:")
     for i, recipe in enumerate(recipes, start=1):
         print(f"\n{i}. {Fore.GREEN}{recipe['Recipe']}{Style.RESET_ALL}")
-        print(f"{Fore.BLUE}Ingredients: {Style.RESET_ALL}{recipe['Ingredients']}")
+        print(f"{Fore.BLUE}Ingredients: {Style.RESET_ALL}"
+              f"{recipe['Ingredients']}")
+
 
 def add_recipe_to_sheet():
     """
-    Allow the user to add a new recipe to the Google Sheet.
+    Add a new recipe to the Google Sheet.
+
+    Returns:
+        bool: True if the recipe is successfully added.
     """
-    
-    # Get recipe details from the user
     recipe_name = input("\nEnter the name of the recipe: ").strip()
     flavor = input("\nEnter the flavor (Salty/Sweet): ").strip().lower()
     while flavor not in ["salty", "sweet"]:
@@ -135,24 +168,22 @@ def add_recipe_to_sheet():
         flavor = input("\nEnter the flavor (Salty/Sweet): ").strip().lower()
     ingredients = input("\nEnter the ingredients (comma-separated): ").strip()
 
-    # Append the new recipe to the Google Sheet
     worksheet = SHEET.worksheet('Meals')
     worksheet.append_row([recipe_name, flavor, ingredients])
 
-    print(f"\nThank you! Your recipe '{recipe_name}' has been added to the recipe collection.")
+    print(f"\nThank you! Your recipe '{recipe_name}' has been added to the "
+          f"recipe collection.")
     return True
 
 
 def main():
     """
-    Main function to run the program with a main menu.
+    Main function to run the program, providing a menu for the user.
     """
     while True:
-        # Display the main menu
         user_choice = display_main_menu()
 
         if user_choice == 1:
-            # Option to find recipes
             flavor = get_user_preference()
             ingredients = get_available_ingredients(flavor)
             recipes = find_recipes(flavor, ingredients)
@@ -160,12 +191,13 @@ def main():
             if recipes:
                 list_recipes_with_ingredients(recipes)
             else:
-                print("\nWe are sorry, we have no recipes found with the given ingredients.")
+                print("\nWe are sorry, we have no recipes found with the "
+                      "given ingredients.")
 
-            # Loop for searching again
-            
             while True:
-                another_search = input("\nWould you like to select a new ingredient and see new recipes? (yes/no): ").strip().lower()
+                another_search = input("\nWould you like to select a new "
+                                       "ingredient and see new recipes? "
+                                       "(yes/no): ").strip().lower()
 
                 if another_search == "yes":
                     ingredients = get_available_ingredients(flavor)
@@ -175,7 +207,8 @@ def main():
                         list_recipes_with_ingredients(recipes)
 
                     else:
-                        print("\nWe are sorry, we have no recipes found with the given ingredients.")
+                        print("\nWe are sorry, we have no recipes found with "
+                              "the given ingredients.")
 
                 elif another_search == "no":
                     print("\nReturning to the main menu...")
@@ -185,31 +218,20 @@ def main():
                     print("Invalid input. Please enter 'yes' or 'no'.")
 
         elif user_choice == 2:
-            # Option to add a recipe
             add_recipe_to_sheet()
 
         elif user_choice == 3:
-            # Confirmation before exiting
             back_to_main_menu = input(
-                "Please enter 'y' to go back to the main menu or anything else to exit: "
-            ).strip().lower()
+                "Please enter 'y' to go back to the main menu or anything "
+                "else to exit: ").strip().lower()
 
             if back_to_main_menu == 'y':
                 print("\nReturning to the main menu...")
-                continue  # Go back to the start of the main loop
+                continue
             else:
                 print("\nThank you for using the Recipe Finder! Goodbye!")
-                break  # Exit the program
-
-    
+                break
 
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
