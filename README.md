@@ -188,7 +188,7 @@ Fore style was chosen due to its easy legibility. None of these have been overly
     <img src="./assets/images/goodbye_message.png" alt="Goodbye message when exiting the program"/>
 </p>
 
-* Invalid input prompts are displayed across the code to guide the user has made a mistake.
+* Invalid input prompts are displayed across the code to indicate the user has made a mistake.
 
 <p align="center">
     <img src="./assets/images/invalid_input.png" alt="Invalid input message"/>
