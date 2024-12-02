@@ -182,6 +182,10 @@ def add_recipe_to_sheet():
 def main():
     """
     Main function to run the program, providing a menu for the user.
+
+    Raises:
+        ValueError: If the user enters invalid when asked 
+        to perform another search"
     """
     while True:
         user_choice = display_main_menu()
