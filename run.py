@@ -40,7 +40,8 @@ def display_main_menu():
             else:
                 print("Invalid choice. Please select 1, 2, or 3.")
         except ValueError:
-            print("Invalid input. Please enter a number (1, 2, or 3).")
+            print(f"{Fore.RED}Invalid input. Please enter a number (1, 2, or 3)."
+                  f"{Style.RESET_ALL}")
 
 
 def get_user_preference():

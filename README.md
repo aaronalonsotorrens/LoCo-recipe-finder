@@ -6,13 +6,13 @@
 
 ## Introduction
 
-Welcome to my third project, part of the Code Institute Full Stack Development Course. The purpose of this project is to build a responsive website using python.
+Welcome to my third project, part of the Code Institute Full Stack Development Course. The purpose of this project is to build a responsive website using Python.
 
-The code is a recipe finder. This is supposed to be a convenient and easy-to-use tool that helps you discover new meal ideas based on common ingredients that most people should have in their homes. The user will have the option to either find a recipe or add a recipe themselves to help other users find new recipes.
+Recipe Finder LoCo is meant for those seeking to "Look less and Cook more". A convenient and easy-to-use tool designed to help users discover new meal ideas based on common ingredients typically found at home. Users can either find a recipe or contribute by adding their own recipes to help others.
 
 ## Strategy
 
-How many times have we come back from a long day at work we look in our fridge and we just stare without knowing what to cook. Recipe finder LoCo is meant for those seeking to look less and cook more. Choose from any of the ingredients dispplayed and make help those tough decisions go away.
+How often do we come home from a long day, open the fridge, and find ourselves staring at its contents without any idea of what to cook? Recipe Finder LoCo is designed to help those moments disappear by letting users quickly choose ingredients and discover delicious recipes, making meal decisions easy and enjoyable.
 
 ## UX - User Experience Design
 
@@ -28,27 +28,27 @@ The 5 planes of UX are the following:
 
 1. As the owner
 
-* I want to show a greeting message and display a menu showing the options available.
+* I want to show a greeting message and display a menu with the available options.
 
-* If the user chooses to find a recipe I want to help them make their choice easier by choosing between salty or sweet 
+* If the user chooses to find a recipe, I want to help them decide by selecting between salty or sweet recipes.
 
-* I want the user to see the list of ingredients they can choose from easily and for recipes to appear when the ingredient is selected.
+* I want the user to easily see the list of ingredients they can choose from and display recipes based on their selection.
 
-* I want errors indicating if the input is not correct and allow the user to try again.
+* I want to provide error messages for incorrect input and allow users to try again.
 
-* I want to give the user to find other recipes with other ingredients.
+* I want to let users search for other recipes with different ingredients.
 
-* I want to give the user to be able to exit and go back to the main menu.
+* I want to allow users to exit or return to the main menu.
 
 * I want the user to feel engaged by allowing to contribute by adding their own recipes.
 
 2. As a customer
 
-* I want to have a tool that will allow me to explore and find new recipes in an easy and simple way.
+* I want a tool that allows me to explore and find new recipes in an easy and straightforward way.
 
-* I want to see all recipes available using the ingredeint selected and to see all remaining ingredients to make that recipe.
+* I want to see all available recipes containing the selected ingredient, along with the remaining ingredients needed.
 
-* Given the choice to add my own recipe I want it to be simple and with instructions easy to follow.
+* If given the option to add my own recipe, I want the process to be simple and the instructions easy to follow.
 
 ### The scope
 
@@ -58,13 +58,13 @@ Below is a list of the leading features for the application.
 
 * A welcome message.
 
-* Option to find a recipe.
-- Option to choose recipe based on flavour preference.
-- Option to choose between list of different ingredients.
-- Option to repeat the process to find new recipes or return to the main menu.
+* Option to find a recipe:
+  * Option to choose recipes based on flavor preference (salty or sweet).
+  * Option to select ingredients from a list.
+  * Option to repeat the process to find new recipes or return to the main menu.
 
 * Option to add new recipe.
-- Add the recipe to the spreadsheet alongside flavour profile and list of ingredients.
+  * Add the recipe to the spreadsheet, including flavor profile and list of ingredients.
 
 #### Out of Scope Features that could be implemented in the future
 
@@ -72,7 +72,7 @@ Below is a list of the leading features for the application.
 
 * Include more flavour profiles or dietary restrictions.
 
-* Include new categories such as nationalities, seasonal, etc.
+* Add new categories such as cuisines, seasonal recipes, etc.
 
 * Add cooking instructions for each recipe for the user to understand how to make their chosen recipe.
 
@@ -80,29 +80,29 @@ Below is a list of the leading features for the application.
 
 The website will be structured with the following design considerations.
 
-* The user will be welcomed to the CLI (Command Line Interface) with a welcome message.
-* The user will be asked for enter one of the following options displayed on the main menu.
-* If they weish to find a recipe they will asked to decide on a flavour profile (Salty/sweet).
-* As a result a list of ingredients will show, from which the user can pick. 
-* This will be followed by a showing a list of recipes containing that ingredients.
-* The user will then get the chance to decide if they wish to repeat the process with a new ingredient or exit.
-* If the customer wishes to add a new recipe instead, they will asked to add the name of the recipe.
-* Followed by its flavour profile.
-* Finally they will be asked to add a list of ingredients within that recipe.
-* The user will be thanked for adding a recipe and they will return to the main menu.
-* If the user wishes to exit instead, they will recieve a prompt to make confirm that decision and if they do wish them goodbye. If they answer no they will go back to the main menu.
+* The user will be greeted by a welcome message in the CLI (Command Line Interface).
+* A menu will be displayed, prompting the user to choose an option.
+* If the user chooses to find a recipe:
+  * They will select a flavor preference (salty or sweet).
+  * A list of relevant ingredients will be displayed for selection.
+  * Recipes containing the chosen ingredient will be shown, along with any remaining ingredients needed.
+  * The user will be asked if they want to search for another recipe or return to the main menu.
+* If the user chooses to add a new recipe:
+  * They will be prompted to enter the recipe name, flavor profile, and list of ingredients.
+  * A confirmation message will be displayed, thanking them for their contribution.
+* If the user opts to exit, they will receive a goodbye message.
 
 ### Skeleton
 
-The website will contain a simple interface that immediately welcomes the customers and takes them through the process with minimal inputs.
+The interface is designed to be simple and clean for an optimal user experience. Key features include:
 
-Aesthetically the page will be clean with no images, with some basic colours on some sections to guide the eye of the user across the code.
-
-Should the user make an error whilst navigating through the system, a message will appear guiding them and allowing them to repeat their input.
+* Minimal inputs for seamless navigation.
+* A clean aesthetic with basic colors (yellow, blue, green, red) to highlight important information.
+* User-friendly error messages that guide users to correct mistakes.
 
 #### Flowchart
 
-A flowchart outlining the customer journey has been created using Lucidchart, The final application may contain higher level of detail.
+A flowchart outlining the customer journey has been created using Lucidchart. The final application may contain higher level of detail.
 
 <p align="center">
     <img src="./assets/images/Lucidchart.png" alt="Lucidchart"/>
@@ -114,7 +114,7 @@ The surface theme has been kept simple and clean for a better user experience.
 
 #### Colour and font
 
-For colour and font colorama was imported into the pipeline for accents of colour throughout the code in order to make easier for the user to follow important information. Yellow, blue, and green are the only three colors chosen. 
+For colour and font colorama was imported into the pipeline for accents of colour throughout the code in order to make easier for the user to follow important information. Yellow, blue, green and red are the only colors chosen. 
 
 Fore style was chosen due to its easy legibility. None of these have been overly used to ensure all critical text is readable.
 
@@ -134,7 +134,7 @@ Fore style was chosen due to its easy legibility. None of these have been overly
     <img src="./assets/images/flavour_preference.png" alt="Flavour preference"/>
 </p>
 
-* Once the flavour is chosen a list of ingredients specific to each flavour preference will show up.
+* Ingredient lists are displayed based on the flavor preference.
 
 <p align="center">
     <img src="./assets/images/ingredient_list.png" alt="List of ingredients"/>
@@ -155,7 +155,7 @@ Fore style was chosen due to its easy legibility. None of these have been overly
 * If "no" the user will return to the main menu.
 
 <p align="center">
-    <img src="./assets/images/return_menu.png" alt="List of ingredients"/>
+    <img src="./assets/images/return_menu.png" alt="Return to the menu"/>
 </p>
 
 * When option 2 is chosen the user will be asked to enter the name of the recipe, alongside their flavour profile (salty/sweet), and list of ingredients.
@@ -186,6 +186,12 @@ Fore style was chosen due to its easy legibility. None of these have been overly
 
 <p align="center">
     <img src="./assets/images/goodbye_message.png" alt="Goodbye message when exiting the program"/>
+</p>
+
+* Invalid input prompts are displayed across the code to guide the user has made a mistake.
+
+<p align="center">
+    <img src="./assets/images/invalid_input.png" alt="Invalid input message"/>
 </p>
 
 
@@ -222,7 +228,9 @@ No major issues found when run through a PEP8 linter. Code Institute's PEP8 lint
 
 ### Fixed Bugs
 
-Throughout this project there were no major bugs. However, I did encounter an issue. My computer broke down during this project and had to request a friends. I opened a new workspace and started adding new commits as I worked on my new workspace without realising they were not being saved. I tried troubleshooting this with tutors by pulling the git commits. However, further errors started appearing. The issue was eventually solved thanks to the help of my mentor where he suggested to save the current code directly in the run.py from github.
+* During the project, no major bugs were encountered.
+* However, there was an issue when the computer broke down mid-project. A new workspace was set up on a friend's computer, but new commits were not being saved properly. After troubleshooting with tutors and trying to pull the commits, further errors occurred.
+* This issue was resolved with the help of the mentor, who suggested saving the current code directly into run.py from GitHub.
 
 ### Unfixed
 
@@ -235,7 +243,7 @@ No unfixed bugs that I am aware of.
 <details>
     <summary></summary>
 
-Create a Spreadsheet (Data Model)
+Create a googlesheet
 1. Login to your Google account, create an account if necessary.
 1. Navigate to Sheets, Googles version of Microsoft Excel.
 1. Start a new spreadsheet,
@@ -326,40 +334,42 @@ Enable API within IDE
 
 ### Credits
 
-I want to my mentor Brian Macharia for all of his amazing support and guidance on how to improve my code and how to deliver a better user experience.
+* Mentorship
 
-Support on developing ideas were derived from the following:
+Special thanks to my mentor Brian Macharia for his incredible support and guidance on improving the code and user experience.
 
-* The inspiration of building a recipe finder
+* Inspiration
+
+  * Inspiration for building a recipe finder:
 https://www.makeuseof.com/recipe-finder-app-python/
 
-* Inspiration from seeing flowcharts and googlesheet organisation 
-https://github.com/RickofManc/vv-pizzas
-https://github.com/alexkavanagh-dev/grocery_list_generator
+  * Flowcharts and Google Sheet organization:
+    * https://github.com/RickofManc/vv-pizzas
+    * https://github.com/alexkavanagh-dev/grocery_list_generator
 
-* Deployment information taken from 
+  * Deployment information was sourced from:
 https://github.com/RickofManc/vv-pizzas
 
 ### Python libraries, software and web application
 
-* To display recipes, flavour profile and ingredients.
-[Google Sheet] (https://docs.google.com/spreadsheets/d/1QEgz7x3UKXEElsaPsE19S-WLulp7T6IgYADYWpCqXQU/edit?pli=1&gid=2115059317#gid=2115059317)
+* Google Sheets - Display recipes, flavor profiles, and ingredients.
+  * [Google Sheet](https://docs.google.com/spreadsheets/d/1QEgz7x3UKXEElsaPsE19S-WLulp7T6IgYADYWpCqXQU/edit?pli=1&gid=2115059317#gid=2115059317)
 
-* To display colours for better visibility.
-[Colorama] (https://pypi.org/project/colorama/)
+* Colorama - Display colors for better visibility.
+  * [Colorama](https://pypi.org/project/colorama/)
 
-* To display flow chart.
-[LucidChart](https://www.lucidchart.com/pages/)
+* Lucidchart - Create flowcharts.
+  * [Lucidchart](https://www.lucidchart.com/pages/)
 
-* To look for questions and solve doubts
-[W3schools](https://www.w3schools.com/)
-[ChatGPT] (https://chatgpt.com)
+* Learning Resources:
+  * [W3schools](https://www.w3schools.com/)
+  * [ChatGPT](https://chatgpt.com)
 
-* For testing sections of code
-[Python Tutor](https://pythontutor.com/)
+* Code Testing:
+  * [Python Tutor](https://pythontutor.com/)
 
-* To validate python code
-[PEP8 Validator](http://pep8online.com/)
+* Python Validation:
+  * [PEP8 Validator](http://pep8online.com/)
 
 
 
