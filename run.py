@@ -38,10 +38,11 @@ def display_main_menu():
             if choice in [1, 2, 3]:
                 return choice
             else:
-                print("Invalid choice. Please select 1, 2, or 3.")
+                print(f"{Fore.RED}Invalid choice. Please select 1, 2, or 3."
+                      f"{Style.RESET_ALL}")
         except ValueError:
-            print(f"{Fore.RED}Invalid input. Please enter a number (1, 2, or 3)."
-                  f"{Style.RESET_ALL}")
+            print(f"{Fore.RED}Invalid input. Please enter a number"
+                  f"(1, 2, or 3).{Style.RESET_ALL}")
 
 
 def get_user_preference():
@@ -165,7 +166,8 @@ def add_recipe_to_sheet():
     recipe_name = input("\nEnter the name of the recipe: ").strip()
     flavor = input("\nEnter the flavor (Salty/Sweet): ").strip().lower()
     while flavor not in ["salty", "sweet"]:
-        print("\nInvalid input. Please enter 'Salty' or 'Sweet'.")
+        print(f"\n{Fore.RED}Invalid input. Please enter"
+              f" 'Salty' or 'Sweet'.{Style.RESET_ALL}")
         flavor = input("\nEnter the flavor (Salty/Sweet): ").strip().lower()
     ingredients = input("\nEnter the ingredients (comma-separated): ").strip()
 
@@ -216,7 +218,8 @@ def main():
                     break
 
                 else:
-                    print("Invalid input. Please enter 'yes' or 'no'.")
+                    print(f"{Fore.RED}Invalid input. Please enter"
+                          f" 'yes' or 'no'.{Style.RESET_ALL}")
 
         elif user_choice == 2:
             add_recipe_to_sheet()
