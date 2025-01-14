@@ -10,6 +10,8 @@ Welcome to my third project, part of the Code Institute Full Stack Development C
 
 Recipe Finder LoCo is meant for those seeking to "Look less and Cook more". A convenient and easy-to-use tool designed to help users discover new meal ideas based on common ingredients typically found at home. Users can either find a recipe or contribute by adding their own recipes to help others.
 
+https://project-3-recipe-finder-0a4d049178eb.herokuapp.com/
+
 ## Strategy
 
 How often do we come home from a long day, open the fridge, and find ourselves staring at its contents without any idea of what to cook? Recipe Finder LoCo is designed to help those moments disappear by letting users quickly choose ingredients and discover delicious recipes, making meal decisions easy and enjoyable.
